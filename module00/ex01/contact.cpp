@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:25:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 21:46:54 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/01 18:58:05 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,44 +25,52 @@ Contact::~Contact(void)
   return ;
 }
 
-static std::string getInput(std::string message)
+void Contact::setFirstName(std::string firstName)
 {
-	std::string input;
-	do
-	{
-		std::cout << message;
-		std::getline(std::cin, input);
-		if (input.empty())
-			std::cout << "Field cannot be empty" << std::endl;
-	} while (input.empty());
-	return (input);
+  this->_firstName = firstName;
 }
 
-void Contact::add(void)
+void Contact::setLastName(std::string lastName)
 {
-	this->_firstName = getInput("First name: ");
-	this->_lastName = getInput("Last name: ");
-	this->_nickName = getInput("Nickname: ");
-	this->_darkSecret = getInput("Darkest secret: ");
-  this->_phoneNumber = getInput("Phone number: ");
-
-	std::cout << "Contact added successfully" << std::endl;
-
-  return ;
+  this->_lastName = lastName;
 }
 
-// void Contact::search(void)
-// {
-//   if (this->_numberOfContacts == 0)
-//   {
-//     std::cout << "No contacts found" << std::endl;
-//     return;
-//   }
-//   std::cout << "Index|First Name|Last Name|Nickname" << std::endl;
-//   for (int i = 0; i < this->_numberOfContacts; i++)
-//   {
-//     std::cout << i << "|";
-//     std::cout << this->_firstName << "|";
-//     std::cout << this->_lastName << "|";
-//     std::cout << this->_nickName << "|" << std::endl;
-// }
+void Contact::setNickName(std::string nickname)
+{
+  this->_nickName = nickname;
+}
+
+void Contact::setDarkSecret(std::string darkSecret)
+{
+  this->_darkSecret = darkSecret;
+}
+
+void Contact::setPhoneNumber(std::string phoneNumber)
+{
+  this->_phoneNumber = phoneNumber;
+}
+
+std::string Contact::getFirstName(void) const
+{
+  return (this->_firstName);
+}
+
+std::string Contact::getLastName(void) const
+{
+  return (this->_lastName);
+}
+
+std::string Contact::getNickName(void) const
+{
+  return (this->_nickName);
+}
+
+std::string Contact::getDarkSecret(void) const
+{
+  return (this->_darkSecret);
+}
+
+std::string Contact::getPhoneNumber(void) const
+{
+  return (this->_phoneNumber);
+}

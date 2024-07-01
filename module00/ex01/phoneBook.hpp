@@ -6,16 +6,16 @@
 class Phonebook
 {
   public:
-	Contact contact[8];
 
 	Phonebook(void);
 	~Phonebook(void);
 
-	void add(void);
-	// Contact seach(int contact);
+	void addContact(void);
+  void searchContact(void) const;
 
   private:
 	int _numberOfContacts;
+	Contact _contacts[8];
 };
 
 #endif
