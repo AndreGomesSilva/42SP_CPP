@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:26:28 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/01 19:18:03 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 21:54:50 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(void) {
   {
     std::string command;
     std::cout << "Enter with a command ADD, SEARCH or EXIT: ";
+    if (std::cin.eof())
+      break;
     std::getline(std::cin, command);
     if (command == "EXIT")
       break;

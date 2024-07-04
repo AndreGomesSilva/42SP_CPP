@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 21:01:43 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/01 19:16:15 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 21:53:15 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static std::string getInput(std::string message)
 void Phonebook::addContact(void)
 {
 	if (this->_numberOfContacts == 8)
+  {
+    this->_numberOfContacts = 0;
 		std::cout << "Becareful, phonebook is full of contacts if you add a new one it will be overwritten " << std::endl;
+  }
 	std::string input;
 	input = getInput("First name: ");
 	this->_contacts[this->_numberOfContacts].setFirstName(input);
@@ -88,10 +91,12 @@ void Phonebook::searchContact(void) const
 		std::cout << "Phonebook is empty" << std::endl;
 		return ;
 	}
-	for (int i = 0; i < this->_numberOfContacts; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		if (i == 0)
 			displayTableHeader();
+    if (this->_contacts[i].getFirstName().empty())
+      break;
 		displayContact(this->_contacts[i], i);
 	}
 }
