@@ -2,7 +2,6 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   phoneBook.cpp                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 21:01:43 by angomes-          #+#    #+#             */
@@ -17,6 +16,8 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+
+int Phonebook::_numberOfContacts = 0;
 
 Phonebook::Phonebook(void)
 {
@@ -89,9 +90,9 @@ static void	displayAllTableHeader(void)
 				<< " | ";
 	std::cout << std::right << std::setw(10) << "Nick Name"
 				<< " | " ;
-	std::cout << std::right << std::setw(10) << "Phone Number"
+	std::cout << std::right << std::setw(10) << "Phone"
 				<< " | ";
-	std::cout << std::right << std::setw(10) << "Darkest Secret"
+	std::cout << std::right << std::setw(10) << "Secret"
 	           << " | " << std::endl;
 }
 
