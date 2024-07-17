@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:25:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 20:55:21 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:43:56 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void Contact::setLastName(std::string lastName) {
   if (lastName.length() > 10) {
     this->_lastName = lastName.substr(0, 9);
     this->_lastName.push_back('.');
-  }
-
-  else
+  } else
     this->_lastName = lastName;
 }
 
@@ -43,22 +41,18 @@ void Contact::setNickName(std::string nickname) {
 }
 
 void Contact::setDarkSecret(std::string darkSecret) {
-  if (darkSecret.length() > 10)
-  {
-      this->_darkSecret = darkSecret.substr(0, 9);
-      this->_darkSecret.push_back('.');
-  }
-  else
+  if (darkSecret.length() > 10) {
+    this->_darkSecret = darkSecret.substr(0, 9);
+    this->_darkSecret.push_back('.');
+  } else
     this->_darkSecret = darkSecret;
 }
 
 void Contact::setPhoneNumber(std::string phoneNumber) {
-  if (phoneNumber.length() > 10)
-  {
-      this->_phoneNumber = phoneNumber.substr(0, 9);
-      this->_phoneNumber.push_back('.');
-  }
-  else
+  if (phoneNumber.length() > 10) {
+    this->_phoneNumber = phoneNumber.substr(0, 9);
+    this->_phoneNumber.push_back('.');
+  } else
     this->_phoneNumber = phoneNumber;
 }
 
