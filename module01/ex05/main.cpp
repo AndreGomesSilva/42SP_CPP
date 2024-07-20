@@ -1,15 +1,15 @@
-#include "Zombie.hpp"
+#include "Harl.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-  int N = 5;
-  std::string name = "Carl";
-  Zombie *horde = zombieHorde(N, name);
-
-  for(int i = 0; i < N; ++i)
+  if (argc == 2)
   {
-    horde[i].announce();
+    Harl harl;
+    std::string level = argv[1];
+    harl.complain(level);
   }
-  delete [] horde;
+  else
+    std::cout << "Wrong number of arguments" << std::endl;
+  
   return (0);
 }
