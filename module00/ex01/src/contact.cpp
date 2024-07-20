@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:25:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/20 20:00:49 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:14:41 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "contact.hpp"
+#include "Contact.hpp"
 
 Contact::Contact(void) { return; }
 
