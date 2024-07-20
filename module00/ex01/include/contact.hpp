@@ -6,14 +6,14 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:25:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/01 18:58:08 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/20 19:33:16 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-# include <string>
+#include <iostream>
 
 class Contact
 {

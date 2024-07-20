@@ -10,12 +10,6 @@
 /* ************************************************************************** */
 
 #include "phoneBook.hpp"
-#include "contact.hpp"
-#include <iomanip>
-#include <ios>
-#include <iostream>
-#include <string>
-#include <cstdlib>
 
 int Phonebook::_numberOfContacts = 0;
 
@@ -32,7 +26,7 @@ Phonebook::~Phonebook(void)
 	return ;
 }
 
-static std::string getInput(std::string message)
+std::string Phonebook::getInput(std::string message) const
 {
 	std::string input;
 	do
@@ -68,7 +62,7 @@ void Phonebook::addContact(void)
 	std::cout << "Contact added successfully" << std::endl;
 }
 
-static void	displayTableHeader(void)
+void	Phonebook::displayTableHeader(void) const
 {
 	std::cout << std::right << std::setw(10) << "Index"
 				<< " | ";
@@ -80,7 +74,7 @@ static void	displayTableHeader(void)
 				<< " | " << std::endl;
 }
 
-static void	displayAllTableHeader(void)
+void	Phonebook::displayAllTableHeader(void) const
 {
 	std::cout << std::right << std::setw(10) << "Index"
 				<< " | ";
@@ -96,25 +90,37 @@ static void	displayAllTableHeader(void)
 	           << " | " << std::endl;
 }
 
-static void	displayContact(Contact contact, int index)
+std::string Phonebook::displayTableContent(const std::string &content) const
+{
+  std::string newContent;
+  if (content.length() > 10) {
+    newContent = content.substr(0, 10);
+    newContent.push_back('.');
+  } else
+    newContent = content;
+  return (newContent);
+}
+
+
+void	Phonebook::displayContact(Contact contact, int index) const
 {
 	std::cout << std::right << std::setw(10) << index + 1 << " | ";
-	std::cout << std::right << std::setw(10) << contact.getFirstName() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getLastName() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getNickName() << " | " << std::endl;
+	std::cout << std::right << std::setw(10) << displayTableContent(contact.getFirstName()) << " | ";
+	std::cout << std::right << std::setw(10) << displayTableContent(contact.getLastName()) << " | ";
+	std::cout << std::right << std::setw(10) << displayTableContent(contact.getNickName()) << " | " << std::endl;
 }
 
-static void displayAllContentOfContact(const Contact& contact, int index)
+void Phonebook::displayAllContentOfContact(const Contact& contact, int index) const
 {
-    std::cout << std::right << std::setw(10) << index + 1 << " | ";
-	std::cout << std::right << std::setw(10) << contact.getFirstName() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getLastName() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getNickName() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getPhoneNumber() << " | ";
-	std::cout << std::right << std::setw(10) << contact.getDarkSecret() << " | " << std::endl;
+  std::cout << "Index: " << index + 1 << std::endl;
+  std::cout << "First Name: " << contact.getFirstName() << std::endl;
+  std::cout << "Last Name: " << contact.getLastName() << std::endl;
+  std::cout << "Nick Name: " << contact.getLastName() << std::endl;
+  std::cout << "Phone Number: " << contact.getPhoneNumber() << std::endl;
+  std::cout << "Secret: " << contact.getDarkSecret() << std::endl;
 }
 
-static void chooseContact(const Contact *contacts)
+void Phonebook::chooseContact(const Contact *contacts) const
 {
     std::string  input;
     
@@ -128,7 +134,6 @@ static void chooseContact(const Contact *contacts)
         if (contacts[index].getFirstName().empty())
             std::cout << "This Contact does not exist" << std::endl;
         else {
-            displayAllTableHeader();
             displayAllContentOfContact(contacts[index], index);
         }
     }

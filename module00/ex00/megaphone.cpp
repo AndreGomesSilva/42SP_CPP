@@ -16,5 +16,6 @@ int main(int argc, char *argv[]) {
       separator = " ";
     }
   }
+  std::cout << std::endl;
   return 0;
 }
