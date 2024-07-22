@@ -1,5 +1,5 @@
 NAME = megaphone
-CC = c++
+CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 INC = -I .

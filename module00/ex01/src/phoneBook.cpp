@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 20:34:43 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/20 20:34:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/20 20:46:35 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ std::string Phonebook::displayTableContent(const std::string &content) const
 {
   std::string newContent;
   if (content.length() > 10) {
-    newContent = content.substr(0, 10);
+    newContent = content.substr(0, 9);
     newContent.push_back('.');
   } else
     newContent = content;
