@@ -1,25 +1,26 @@
 #include "Harl.hpp"
 
+int select_level(std::string level) {
+  std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+  for (int i = 0; i < 4; i++) {
+    if (level == levels[i])
+      return i;
+  }
+  return -1;
+}
+
 int main(int argc, char **argv) {
   if (argc == 2) {
-    int level;
     Harl Harl;
-    for (int i = 0; argv[1][i]; i++) {
-      level += argv[1][i] - '0';
-    }
+    int level = select_level(argv[1]);
     switch (level) {
-    case 119:
+    case 0:
       Harl.complain("DEBUG");
-      break;
-    case 108:
+    case 1:
       Harl.complain("INFO");
-      break;
-    case 198:
+    case 2:
       Harl.complain("WARNING");
-      std::cout << std::endl;
-      Harl.complain("ERROR");
-      break;
-    case 154:
+    case 3:
       Harl.complain("ERROR");
       break;
     default:

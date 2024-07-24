@@ -1,17 +1,17 @@
 #include "Replace.hpp"
 
-std::string replaceString(std::string const &source, std::string const &oldStr, std::string const &newStr)
-{
+std::string replaceString(std::string const &source, std::string const &oldStr,
+                          std::string const &newStr) {
   std::string result;
   size_t pos = 0;
   size_t len = oldStr.length();
-  
+  size_t foundPos;
+
   while (true) {
 
-    size_t foundPos = source.find(oldStr, pos);
+    foundPos = source.find(oldStr, pos);
 
-    if (foundPos == std::string::npos)
-    {
+    if (foundPos == std::string::npos) {
       result += source.substr(pos);
       break;
     }
@@ -23,8 +23,7 @@ std::string replaceString(std::string const &source, std::string const &oldStr, 
   return (result);
 }
 
-std::string replaceExtension(std::string const &str, std::string const &ext)
-{
+std::string replaceExtension(std::string const &str, std::string const &ext) {
   size_t pos = str.find_last_of(".");
   if (pos == std::string::npos)
     return (str + ext);
