@@ -12,7 +12,7 @@ public:
   Fixed(float const value);
   ~Fixed(void);
 
-  Fixed &operator=(Fixed const &rhs);
+  Fixed &operator=(Fixed const &Fixed);
 
   int getRawBits(void) const;
   void setRawBits(int const raw);
@@ -24,5 +24,6 @@ private:
   int _value;
   static const int _fractional_bits = 8;
 };
+std::ostream &operator<<(std::ostream &os, Fixed const &Fixed);
 
 #endif // __FIXED_HPP__

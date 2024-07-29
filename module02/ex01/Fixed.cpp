@@ -21,11 +21,22 @@ Fixed::Fixed(const float value) {
 
 Fixed::~Fixed(void) { std::cout << "Destructor called" << std::endl; }
 
-Fixed &Fixed::operator=(Fixed const &rhs) {
+Fixed &Fixed::operator=(Fixed const &Fixed) {
   std::cout << "Assignation operator called" << std::endl;
-  if (this != &rhs)
-    this->_value = rhs.getRawBits();
+  if (this != &Fixed)
+    this->_value = Fixed.getRawBits();
   return *this;
+}
+
+std::ostream &operator<<(std::ostream &os, Fixed const &Fixed) {
+  os << Fixed.toFloat();
+  return os;
+}
+
+int Fixed::toInt(void) const { return this->_value >> _fractional_bits; }
+
+float Fixed::toFloat(void) const {
+  return (float)this->_value / (1 << _fractional_bits);
 }
 
 int Fixed::getRawBits(void) const {
