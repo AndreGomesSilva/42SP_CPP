@@ -1,18 +1,26 @@
+#include "Fixed.hpp"
 #include "Point.hpp"
 
 int main() {
-  Point a(0, 0);
-  Point b(10, 30);
-  Point c(20, 0);
-  Point point(1, 1);
-  std::cout << bsp(a, b, c, point) << std::endl;
+  Triangle *triangles[] = {
+      new Triangle(Point(0, 10), Point(10, 10), Point(10, 0)),
+      new Triangle(Point(20, 0), Point(20, 20), Point(20, 0))};
+  int triangleCount = sizeof(triangles) / sizeof(triangles[0]);
 
-  point.setX(0);
-  point.setY(0);
-  std::cout << bsp(a, b, c, point) << std::endl;
+  BSPNode *bspRoot = constructBSP(triangles, triangleCount);
 
-  point.setX(2);
-  point.setY(2);
-  std::cout << bsp(a, b, c, point) << std::endl;
+  Point P = Point(2.5, 2);
+
+  if (isPointInBSP(bspRoot, P)) {
+    std::cout << "Point P is inside one of the triangles." << std::endl;
+  } else {
+    std::cout << "Point P is outside all the triangles." << std::endl;
+  }
+
+  delete bspRoot;
+  for (int i = 0; i < triangleCount; ++i) {
+    delete triangles[i];
+  }
+
   return 0;
 }

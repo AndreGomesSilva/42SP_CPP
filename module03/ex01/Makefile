@@ -1,4 +1,4 @@
-NAME = bsp
+NAME = ClapTrap
 CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
@@ -9,9 +9,7 @@ SRCS_DIR = ./
 OBJS_DIR = objs/
 
 FILE = main \
-			 Fixed \
-			 Point \
-			 bsp
+			 ClapTrap \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
