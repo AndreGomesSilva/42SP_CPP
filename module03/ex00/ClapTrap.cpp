@@ -1,16 +1,24 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
-    : _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {}
+    : _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout << "ClapTrap " << _name << " is created!" << std::endl;
+}
 
 ClapTrap::ClapTrap(std::string name)
-    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {}
+    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout << "ClapTrap " << _name << " is created!" << std::endl;
+}
 
 ClapTrap::ClapTrap(ClapTrap const &src)
     : _name(src._name), _hitPoints(src._hitPoints),
-      _energyPoints(src._energyPoints), _attackDamage(src._attackDamage) {}
+      _energyPoints(src._energyPoints), _attackDamage(src._attackDamage) {
+  std::cout << "ClapTrap " << _name << " is created!" << std::endl;
+}
 
-ClapTrap::~ClapTrap() {}
+ClapTrap::~ClapTrap() {
+  std::cout << "ClapTrap " << _name << " is destroyed!" << std::endl;
+}
 
 ClapTrap &ClapTrap::operator=(ClapTrap const &rhs) {
   _name = rhs._name;

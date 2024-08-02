@@ -1,4 +1,4 @@
-NAME = ScavTrap
+NAME = FragTrap
 CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
@@ -10,7 +10,8 @@ OBJS_DIR = objs/
 
 FILE = main \
 			 ClapTrap \
-			 ScavTrap
+			 ScavTrap \
+			 FragTrap
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
