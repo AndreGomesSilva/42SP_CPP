@@ -1,5 +1,5 @@
-#ifndef __FIXED_HPP__
-#define __FIXED_HPP__
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 
@@ -9,7 +9,7 @@ public:
   Fixed(Fixed const &src);
   ~Fixed(void);
 
-  Fixed &operator=(Fixed const &rhs);
+  Fixed &operator=(Fixed const &other);
 
   int getRawBits(void) const;
   void setRawBits(int const raw);

@@ -1,0 +1,110 @@
+[
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "src/main.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/Animal.cpp",
+   "-o",
+   "objs/Animal.o"
+  ],
+  "file": "src/Animal.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/Cat.cpp",
+   "-o",
+   "objs/Cat.o"
+  ],
+  "file": "src/Cat.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/Dog.cpp",
+   "-o",
+   "objs/Dog.o"
+  ],
+  "file": "src/Dog.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/WrongAnimal.cpp",
+   "-o",
+   "objs/WrongAnimal.o"
+  ],
+  "file": "src/WrongAnimal.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/WrongCat.cpp",
+   "-o",
+   "objs/WrongCat.o"
+  ],
+  "file": "src/WrongCat.cpp"
+ }
+]

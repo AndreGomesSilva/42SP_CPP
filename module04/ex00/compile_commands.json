@@ -1,0 +1,38 @@
+[
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "src/main.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module04/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/Animal.cpp",
+   "-o",
+   "objs/Animal.o"
+  ],
+  "file": "src/Animal.cpp"
+ }
+]

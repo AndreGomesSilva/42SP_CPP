@@ -36,7 +36,7 @@ std::ostream &operator<<(std::ostream &os, Fixed const &Fixed) {
 int Fixed::toInt(void) const { return this->_value >> _fractional_bits; }
 
 float Fixed::toFloat(void) const {
-  return (float)this->_value / (1 << _fractional_bits);
+  return static_cast<float>(this->_value) / (1 << _fractional_bits);
 }
 
 int Fixed::getRawBits(void) const {
