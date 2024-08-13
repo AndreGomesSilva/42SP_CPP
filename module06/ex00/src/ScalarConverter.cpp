@@ -28,88 +28,89 @@ static bool isChar(const std::string &str) {
 }
 
 static bool isInteger(const std::string &str) {
-  if (str.empty())
-    return false;
-  std::istringstream iss(str);
-  int num;
-  iss >> std::noskipws >> num;
-  return iss.eof() && !iss.fail();
+  for (size_t i = 0; i < str.length(); i++) {
+    if (i == 0 && (str[i] == '-' || str[i] == '+') && str.length() > 1)
+      continue;
+    if (!std::isdigit(str[i]))
+      return false;
+  }
+  return true;
 }
 
 static bool isFloat(const std::string &str) {
-  if (!str.empty() && str.find('.') != std::string::npos &&
-      str.end()[-1] == 'f') {
-    std::string floatPart = str.substr(0, str.length() - 1);
-    std::istringstream issFloat(floatPart);
-    float num;
-    issFloat >> std::noskipws >> num;
-    return issFloat.eof() && !issFloat.fail();
+  int dotCount = 0;
+  for (size_t i = 0; i < str.length(); i++) {
+    if (i == 0 && (str[i] == '-' || str[i] == '+') && str.length() > 1)
+      continue;
+    if (!std::isdigit(str[i]) && str[i] != 'f' && str[i] != '.')
+      return false;
+    if (str[i] == '.')
+      dotCount++;
+    if (str.end()[-1] == 'f' && str[i] == 'f')
+      return true;
+    if (dotCount > 1)
+      return false;
   }
   return false;
 }
 
 static bool isDouble(const std::string &str) {
-  if (!str.empty() && str.find('.') != std::string::npos) {
-    std::string floatPart = str.substr(0, str.length() - 1);
-    std::istringstream issFloat(floatPart);
-    double num;
-    issFloat >> std::noskipws >> num;
-    return issFloat.eof() && !issFloat.fail();
+  int dotCount = 0;
+  for (size_t i = 0; i < str.length(); i++) {
+    if (i == 0 && (str[i] == '-' || str[i] == '+') && str.length() > 1)
+      continue;
+    if (!std::isdigit(str[i]) && str[i] != '.')
+      return false;
+    if (str[i] == '.')
+      dotCount++;
+    if (dotCount > 1)
+      return false;
   }
-  return false;
+  return true;
 }
 
 // print types
 static void printValidChar(char c) {
-  if (c < 32 || c > 126)
+  if (c >= 32 && c <= 126)
+    std::cout << "char: '" << c << "'" << std::endl;
+  else if (c == 127 || (c >= 0 && c <= 31))
     std::cout << "char: Non displayable" << std::endl;
   else
-    std::cout << "char: '" << c << "'" << std::endl;
+    std::cout << "char: impossible" << std::endl;
 }
 
 static void printValidInt(int value) {
-  if (value < std::numeric_limits<int>::min() ||
-      value > std::numeric_limits<int>::max())
+  if (value <= std::numeric_limits<int>::min() ||
+      value >= std::numeric_limits<int>::max())
     std::cout << "int: impossible" << std::endl;
   else
     std::cout << "int: " << value << std::endl;
 }
 
 static void printValidFloat(float value) {
-  if (value < std::numeric_limits<float>::min() ||
-      value > std::numeric_limits<float>::max() ||
-      value == std::numeric_limits<float>::infinity() ||
-      value == -std::numeric_limits<float>::infinity())
+  if (value < -std::numeric_limits<float>::max() ||
+      value > std::numeric_limits<float>::max())
+
     std::cout << "float: impossible" << std::endl;
   else
-    std::cout << "float: " << value << std::endl;
+    std::cout << "float: " << value << "f" << std::endl;
 }
 
 static void printValidDouble(double value) {
-  if (value < std::numeric_limits<double>::min() ||
-      value > std::numeric_limits<double>::max() ||
-      value == std::numeric_limits<double>::infinity() ||
-      value == -std::numeric_limits<double>::infinity())
+  if (value < -std::numeric_limits<double>::max() ||
+      value > std::numeric_limits<double>::max())
     std::cout << "double: impossible" << std::endl;
   else
     std::cout << "double: " << value << std::endl;
 }
 
 // convert types
-static char strToChar(const std::string &str) { return str[0]; }
 
 static void charToIntFloatDouble(char input) {
   printValidChar(input);
   printValidInt(static_cast<int>(input));
   printValidFloat(static_cast<float>(input));
   printValidDouble(static_cast<double>(input));
-}
-
-static int strToInt(const std::string &str) {
-  std::istringstream iss(str);
-  int num;
-  iss >> std::noskipws >> num;
-  return num;
 }
 
 static void intToCharFloatDouble(int input) {
@@ -119,25 +120,11 @@ static void intToCharFloatDouble(int input) {
   printValidDouble(static_cast<double>(input));
 }
 
-static float strToFloat(const std::string &str) {
-  std::istringstream iss(str);
-  float num;
-  iss >> std::noskipws >> num;
-  return num;
-}
-
 static void floatToCharIntDouble(float input) {
   printValidChar(static_cast<char>(input));
   printValidInt(static_cast<int>(input));
   printValidFloat(input);
   printValidDouble(static_cast<double>(input));
-}
-
-static double strToDouble(const std::string &str) {
-  std::istringstream iss(str);
-  double num;
-  iss >> std::noskipws >> num;
-  return num;
 }
 
 static void doubleToCharIntFloat(double input) {
@@ -148,17 +135,22 @@ static void doubleToCharIntFloat(double input) {
 }
 
 static void convertByType(std::string input) {
+  std::istringstream iss(input);
   if (isChar(input)) {
-    char inputChar = strToChar(input);
+    char inputChar;
+    iss >> std::noskipws >> inputChar;
     charToIntFloatDouble(inputChar);
   } else if (isInteger(input)) {
-    int inputInt = strToInt(input);
+    int inputInt;
+    iss >> std::noskipws >> inputInt;
     intToCharFloatDouble(inputInt);
   } else if (isFloat(input)) {
-    float inputFloat = strToFloat(input);
+    float inputFloat;
+    iss >> std::noskipws >> inputFloat;
     floatToCharIntDouble(inputFloat);
   } else if (isDouble(input)) {
-    double inputDouble = strToDouble(input);
+    double inputDouble;
+    iss >> std::noskipws >> inputDouble;
     doubleToCharIntFloat(inputDouble);
   } else if (input == "nan" || input == "nanf") {
     std::cout << "char: impossible" << std::endl;
