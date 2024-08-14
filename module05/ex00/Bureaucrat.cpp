@@ -67,9 +67,9 @@ void Bureaucrat::decrementGrade(unsigned int level) {
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
-  return "Grade is too low!";
+  return "Grade iss too low!";
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
-  return "Grade is too hight!";
+  return "Grade iss too high!";
 }

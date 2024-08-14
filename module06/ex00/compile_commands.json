@@ -1,0 +1,38 @@
+[
+ {
+  "directory": "/home/angomes/Documents/code/42/c++/module06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "src/main.cpp"
+ },
+ {
+  "directory": "/home/angomes/Documents/code/42/c++/module06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-MMD",
+   "-MP",
+   "-I./include/",
+   "-c",
+   "src/ScalarConverter.cpp",
+   "-o",
+   "objs/ScalarConverter.o"
+  ],
+  "file": "src/ScalarConverter.cpp"
+ }
+]
