@@ -18,4 +18,5 @@ private:
 public:
   static void convert(std::string input);
 };
+
 #endif // SCALAR_CONVERTER_HPP

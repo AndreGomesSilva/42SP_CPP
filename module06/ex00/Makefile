@@ -1,5 +1,5 @@
 #Basic variable
-NAME = converter
+NAME = convert
 CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 DEPFLAGS = -MMD -MP
