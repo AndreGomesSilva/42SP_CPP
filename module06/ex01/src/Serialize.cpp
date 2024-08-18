@@ -1,4 +1,4 @@
-#include "Serialize.hpp"
+#include "../include/Serialize.hpp"
 
 uintptr_t Serialize::serialize(Data *ptr) {
   return reinterpret_cast<uintptr_t>(ptr);
@@ -10,8 +10,11 @@ Data *Serialize::deserialize(uintptr_t raw) {
 
 Serialize::Serialize() {}
 
-Serialize::Serialize(Serialize const &src) {}
+Serialize::Serialize(Serialize const &src) { (void)src; }
 
 Serialize::~Serialize() {}
 
-Serialize &Serialize::operator=(Serialize const &rhs) { return *this; }
+Serialize &Serialize::operator=(Serialize const &rhs) {
+  (void)rhs;
+  return *this;
+}
