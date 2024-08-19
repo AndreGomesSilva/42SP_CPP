@@ -1,0 +1,56 @@
+[
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module05/ex02",
+  "arguments": [
+   "c++",
+   "-g3",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I",
+   "./",
+   "-c",
+   "main.cpp",
+   "-o",
+   "objs/main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module05/ex02",
+  "arguments": [
+   "c++",
+   "-g3",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I",
+   "./",
+   "-c",
+   "Bureaucrat.cpp",
+   "-o",
+   "objs/Bureaucrat.o"
+  ],
+  "file": "Bureaucrat.cpp"
+ },
+ {
+  "directory": "/nfs/homes/angomes-/Documents/42/42SP_CPP/module05/ex02",
+  "arguments": [
+   "c++",
+   "-g3",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I",
+   "./",
+   "-c",
+   "AForm.cpp",
+   "-o",
+   "objs/AForm.o"
+  ],
+  "file": "AForm.cpp"
+ }
+]

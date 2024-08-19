@@ -1,9 +1,12 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "iostream"
+#include "Form.hpp"
 #include <exception>
+#include <iostream>
 #include <string>
+
+class Form;
 
 class Bureaucrat {
 private:
@@ -21,6 +24,7 @@ public:
   std::string getName(void) const;
   unsigned int getGrade(void) const;
   void setGrade(unsigned int);
+  void signForm(Form &form);
 
   void incrementGrade(unsigned int level = 1);
   void decrementGrade(unsigned int level = 1);
@@ -32,8 +36,10 @@ public:
 
   class GradeTooLowException : public std::exception {
   public:
-    virtual const char *what() const throw();
+    const char *what() const throw();
   };
 };
+
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &Bureaucrat);
 
 #endif // BUREAUCRAT_HPP

@@ -10,6 +10,7 @@ OBJS_DIR = objs/
 
 FILE = main \
 			 Bureaucrat \
+			 Form 
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
@@ -23,7 +24,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp | $(OBJS_DIR)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)$(EX_DIR)
 
 val:
 	@make

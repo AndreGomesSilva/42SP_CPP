@@ -36,4 +36,6 @@ public:
   };
 };
 
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &Bureaucrat);
+
 #endif // BUREAUCRAT_HPP
