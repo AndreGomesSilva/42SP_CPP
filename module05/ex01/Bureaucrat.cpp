@@ -73,7 +73,7 @@ void Bureaucrat::decrementGrade(unsigned int level) {
   }
 }
 
-void Bureaucrat::signForm(AForm &form) {
+void Bureaucrat::signForm(Form &form) {
   try {
     if (this->getGrade() < 1) {
       throw Bureaucrat::GradeTooHighException();

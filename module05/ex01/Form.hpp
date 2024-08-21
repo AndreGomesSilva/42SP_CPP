@@ -1,3 +1,4 @@
+#pragma once
 #ifndef FORM_HPP
 #define FORM_HPP
 
