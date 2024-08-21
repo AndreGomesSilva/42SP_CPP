@@ -11,7 +11,9 @@ OBJS_DIR = objs/
 FILE = main \
 			 Bureaucrat \
 			 AForm \
-			 ShrubberyCreationForm
+			 ShrubberyCreationForm \
+			 RobotomyRequestForm \
+			 PresidentialPardonForm
 
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))

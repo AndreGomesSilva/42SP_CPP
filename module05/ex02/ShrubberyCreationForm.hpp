@@ -3,10 +3,14 @@
 
 #include "AForm.hpp"
 #include "iostream"
+#include <fstream>
 
 class ShrubberyCreationForm : public AForm {
 private:
   std::string _target;
+  void createTree(std::string target) const;
+  void destroyTree(std::string target) const;
+  void action() const;
 
 public:
   ShrubberyCreationForm();
@@ -14,9 +18,8 @@ public:
   ShrubberyCreationForm(ShrubberyCreationForm &copy);
   ~ShrubberyCreationForm();
 
-  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &copy);
-  virtual void beSigned(Bureaucrat &Bureaucrat);
-  virtual bool hasSigned(void) const;
+  ShrubberyCreationForm &operator=(ShrubberyCreationForm &copy);
+  std::string getTarget() const;
 };
 
 #endif

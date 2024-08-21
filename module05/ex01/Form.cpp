@@ -3,7 +3,7 @@
 Form::Form()
     : _name("default"), _signed(false), _gradeToSign(150),
       _gradeToExecute(150) {
-  std::cout << "default form: " << *this << " was created " << std::endl;
+  std::cout << "default " << *this << " was created " << std::endl;
 }
 
 Form::Form(std::string name, unsigned int gradeToSign,
@@ -15,7 +15,7 @@ Form::Form(std::string name, unsigned int gradeToSign,
   else if (gradeToSign > 150 || gradeToExecute > 150)
     throw(Form::GradeTooLowException());
   else {
-    std::cout << "Form: " << *this << " was created " << std::endl;
+    std::cout << *this << " was created " << std::endl;
   };
 }
 
@@ -23,17 +23,17 @@ Form::Form(const Form &copy)
     : _name(copy._name), _signed(copy._signed), _gradeToSign(copy._gradeToSign),
       _gradeToExecute(copy._gradeToExecute) {
 
-  std::cout << "Form: " << *this << " was copied " << std::endl;
+  std::cout << *this << " was copied " << std::endl;
 };
 
 Form::~Form() {
-  std::cout << "Form: " << *this << " was deleted " << std::endl;
+  std::cout << *this << " was deleted " << std::endl;
 };
 
 Form &Form::operator=(const Form &copy) {
   if (this != &copy) {
     _signed = copy._signed;
-    std::cout << "Form: " << *this << " was copied " << std::endl;
+    std::cout << *this << " was copied " << std::endl;
   }
   return *this;
 }

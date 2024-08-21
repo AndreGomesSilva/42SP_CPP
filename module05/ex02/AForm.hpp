@@ -19,11 +19,14 @@ public:
   AForm();
   AForm(std::string name, unsigned int gradeToSigned,
         unsigned int gradeToExecute);
-  ~AForm();
+  virtual ~AForm();
   AForm(const AForm &copy);
   AForm &operator=(const AForm &copy);
 
-  virtual void beSigned(Bureaucrat &Bureaucrat) = 0;
+  //pure virtual method
+  virtual void beSigned(Bureaucrat &Bureaucrat);
+  void execute(Bureaucrat const &executor) const;
+  virtual void action() const = 0;
 
   const std::string getName(void) const;
   bool hasSigned(void) const;
@@ -35,6 +38,9 @@ public:
     const char *what() const throw();
   };
   class GradeTooHighException : public std::exception {
+    const char *what() const throw();
+  };
+  class FormNotSignedException : public std::exception {
     const char *what() const throw();
   };
 };
