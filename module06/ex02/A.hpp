@@ -4,6 +4,6 @@
 #include "Base.hpp"
 #include "iostream"
 
-class A : public Base {}
+class A : public Base {};
 
-#endif
+#endif // A_HPP

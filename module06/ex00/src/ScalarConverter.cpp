@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <ios>
 
 ScalarConverter::ScalarConverter() {
   std::cout << "ScalarConverter default constructor called" << std::endl;
@@ -159,6 +160,8 @@ static void intToCharFloatDouble(int input, int fractional) {
   char charValue = static_cast<char>(input);
   float floatValue = static_cast<float>(input);
   double doubleValue = static_cast<double>(input);
+  if (input < 0 || input > 127)
+    std::cout << "char: impossible" << std::endl;
   if (validChar(charValue)) {
     printChar(charValue);
   }
@@ -175,7 +178,9 @@ static void floatToCharIntDouble(float input, int fractional) {
   char charValue = static_cast<char>(input);
   int intValue = static_cast<int>(input);
   double doubleValue = static_cast<double>(input);
-  if (validChar(charValue)) {
+  if (intValue < 0 || intValue > 127)
+    std::cout << "char: impossible" << std::endl;
+  else if (validChar(charValue)) {
     printChar(charValue);
   }
   if (validInt(intValue)) {
@@ -191,9 +196,12 @@ static void doubleToCharIntFloat(double input, int fractional) {
   char charValue = static_cast<char>(input);
   int intValue = static_cast<int>(input);
   float floatValue = static_cast<float>(input);
-  if (validChar(charValue)) {
+  if (intValue < 0 || intValue > 127)
+    std::cout << "char: impossible" << std::endl;
+  else if (validChar(charValue)) {
     printChar(charValue);
   }
+
   if (validInt(intValue)) {
     printInt(intValue);
   }
@@ -208,8 +216,10 @@ static void convertByType(std::string input) {
   int fractionalPart = 0;
   if (isChar(input)) {
     char inputChar;
+    int rangeChar;
+    iss >> std::noskipws >> rangeChar;
     iss >> std::noskipws >> inputChar;
-    if (iss.fail()) {
+    if (iss.fail() || (rangeChar < 0 || rangeChar > 127)) {
       std::cout << "char: impossible" << std::endl;
     }
     charToIntFloatDouble(inputChar, fractionalPart);

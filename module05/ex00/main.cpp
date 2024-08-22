@@ -2,6 +2,10 @@
 #include <ostream>
 
 int main() {
+  std::cout << std::endl;
+  std::cout << "                  ______EX00______                      "
+            << std::endl;
+  std::cout << std::endl;
   try {
     std::cout << "Trying to create a new bureaucrat with grade of 200"
               << std::endl;
@@ -9,7 +13,6 @@ int main() {
   } catch (const Bureaucrat::GradeTooLowException &e) {
     std::cerr << e.what() << std::endl;
   }
-
   std::cout << "--------------" << std::endl;
 
   try {

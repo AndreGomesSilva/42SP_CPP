@@ -12,9 +12,7 @@ Intern &Intern::operator=(const Intern &copy) {
   std::cout << "Intern copy assignment operator called" << std::endl;
 }
 
-Intern::~Intern() {
-  std::cout << "Intern destructor called" << std::endl;
-}
+Intern::~Intern() { std::cout << "Intern destructor called" << std::endl; }
 
 AForm *Intern::factoryShrubbery(std::string target) {
   return new ShrubberyCreationForm(target);
@@ -29,11 +27,13 @@ AForm *Intern::factoryPresidential(std::string target) {
 }
 
 AForm *Intern::makeForm(std::string name, std::string target) {
-  std::string names[3] = {"shrubbery request", "robotomy request", "presidential pardon request"};
-  AForm  *(Intern::*forms[3])(std::string) = {&Intern::factoryShrubbery, &Intern::factoryRobotomy, &Intern::factoryPresidential};
-  for (unsigned int i = 0; i < names->length(); i++) {
-    if (names[i] == name)
-    {
+  std::string names[3] = {"shrubbery request", "robotomy request",
+                          "presidential pardon request"};
+  AForm *(Intern::*forms[3])(std::string) = {&Intern::factoryShrubbery,
+                                             &Intern::factoryRobotomy,
+                                             &Intern::factoryPresidential};
+  for (unsigned int i = 0; i < 3; i++) {
+    if (names[i] == name) {
       std::cout << "Intern creates " << name << std::endl;
       return (this->*forms[i])(target);
     }
