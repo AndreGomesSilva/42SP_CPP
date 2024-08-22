@@ -1,4 +1,4 @@
-NAME = ex02
+NAME = ex03
 CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
@@ -33,7 +33,7 @@ $(OBJS_DIR):
 
 val:
 	@make
-	@$(LEAK) ./$(NAME)	
+	@$(LEAK) ./$(NAME)
 
 clean:
 	$(RM) $(OBJS_DIR)
