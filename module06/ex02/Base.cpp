@@ -42,7 +42,7 @@ void identify(Base &p) {
     (void)dynamic_cast<A &>(p);
     std::cout << "A" << std::endl;
     return;
-  } catch (...) {
+  } catch (std::exception &e) {
     std::cout << "problem to cast reference of Base class to a derived class A"
               << std::endl;
   }
@@ -50,7 +50,7 @@ void identify(Base &p) {
     (void)dynamic_cast<B &>(p);
     std::cout << "B" << std::endl;
     return;
-  } catch (...) {
+  } catch (std::exception &e) {
     std::cout << "problem to cast reference of Base class to a derived class B"
               << std::endl;
   }
@@ -58,7 +58,7 @@ void identify(Base &p) {
     (void)dynamic_cast<C &>(p);
     std::cout << "C" << std::endl;
     return;
-  } catch (...) {
+  } catch (std::exception &e) {
     std::cout << "problem to cast reference of Base class to a derived class C"
               << std::endl;
   }
