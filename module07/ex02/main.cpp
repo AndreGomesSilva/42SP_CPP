@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include "iostream"
+#include <exception>
 
 template <typename T> void printArray(Array<T> array) {
   std::cout << "Array elements: ";
@@ -26,4 +27,22 @@ int main(void) {
   std::cout << "int array" << std::endl;
   printArray(intArray);
   std::cout << std::endl;
+
+  std::cout << "char array" << std::endl;
+  Array<char> charArray(6);
+  charArray[0] = 'm';
+  charArray[1] = 'a';
+  charArray[2] = 'r';
+  charArray[3] = 'v';
+  charArray[4] = 'i';
+  charArray[5] = 'n';
+  printArray(charArray);
+  std::cout << std::endl;
+
+  std::cout << "try add element out of range" << std::endl;
+  try {
+    charArray[6] = '!';
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 }
