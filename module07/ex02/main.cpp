@@ -45,4 +45,9 @@ int main(void) {
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
+  try {
+    charArray[-1] = '!';
+  } catch (std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
 }
