@@ -50,4 +50,18 @@ public:
   unsigned int size() const { return _size; }
 };
 
+template <typename T> void printArray(Array<T> array) {
+  std::cout << "Array elements: ";
+  for (unsigned int i = 0; i < array.size(); ++i) {
+    std::cout << array[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
+template <typename T> void fillArray(Array<T> &arr, unsigned N) {
+  for (unsigned int i = 0; i < N; ++i) {
+    arr[i] = i;
+  }
+}
+
 #endif
