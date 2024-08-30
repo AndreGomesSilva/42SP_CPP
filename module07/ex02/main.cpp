@@ -25,6 +25,13 @@ int main(void) {
   printArray(charArray);
   std::cout << std::endl;
 
+  std::cout << "Array of Strings" << std::endl;
+  Array<std::string> stringArray(2);
+  stringArray[0] = "Hello";
+  stringArray[1] = "World";
+  printArray(stringArray);
+  std::cout << std::endl;
+
   std::cout << "try add element out of range" << std::endl;
   try {
     charArray[6] = '!';

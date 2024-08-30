@@ -15,7 +15,7 @@ template <typename T> void iter(const T *array, size_t length, void (*func)(cons
   }
 }
 
-template <typename T> void printElement(T &element) {
+template <typename T> void printElement(const T &element) {
   std::cout << element << " ";
 }
 

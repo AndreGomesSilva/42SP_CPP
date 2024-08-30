@@ -1,43 +1,34 @@
 #include "iter.hpp"
 #include <iostream>
 
-void increment(int &i) { i++; }
+class Awesome
+{
+  public:
+    Awesome( void ) : _n( 42 ) { return; }
+    int get( void ) const { return this->_n; }
+  private:
+    int _n;
+};
 
-void fillArray(int *arr, int N) {
-  for (int i = 0; i < N; ++i) {
-    arr[i] = i;
-  }
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs )
+{
+  o << rhs.get();
+  return o;
 }
 
-void changeOForA(std::string &str) {
-  for (unsigned int i = 0; i < str.length(); ++i) {
-    if (str[i] == 'o') {
-      str[i] = 'a';
-    }
-  }
- }
+template< typename T >
+void print( T& x )
+{
+  std::cout << x << std::endl;
+  return;
+}
 
-int main(void) {
-  int size = 10;
-  int arr[size];
+int main() {
+  int tab[] = { 0, 1, 2, 3, 4 };
+  Awesome tab2[5];
 
-  fillArray(arr, size);
-  iter(arr, size, printElement);
-  std::cout << std::endl;
-  std::cout << "---------------" << std::endl;
-  iter(arr, size, increment);
-  iter(arr, size, printElement);
+  iter( tab, 5, print<const int> );
+  iter( tab2, 5, print<Awesome> );
 
-  std::cout << std::endl;
-  std::cout << "---------------" << std::endl;
-  std::string str[] = {"hello", "world"};
-  iter(str, 2, printElement);
-  std::cout << std::endl;
-  std::cout << std::endl;
-  std::cout << "change \'o\' to \'a\'" << std::endl;
-  std::cout << std::endl;
-  iter(str, 2, changeOForA);
-  iter(str, 2, printElement);
-  std::cout << std::endl;
   return 0;
 }
