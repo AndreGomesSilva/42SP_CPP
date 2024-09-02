@@ -30,7 +30,7 @@ void testFillSp(){
     vec.push_back(rand() % 20000);
    std::cout << "filling span" << std::endl;
    sp.fill(vec.begin(), vec.end());
-   std::cout << sp.getCapacity() <<std::endl;
+   std::cout << sp.getCapacity() << std::endl;
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';
   }
