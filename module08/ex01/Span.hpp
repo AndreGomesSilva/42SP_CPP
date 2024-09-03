@@ -1,8 +1,9 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-#include <filesystem>
 # include <iostream>
+# include <stdexcept>
+# include <limits>
 # include <vector>
 # include <algorithm>
 
@@ -30,7 +31,7 @@ public:
         addNumber(*it);
     }
     else
-      throw std::exception();
+      throw std::out_of_range("iterator out of range");
   }
 };
 

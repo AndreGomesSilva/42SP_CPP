@@ -1,7 +1,7 @@
 #include "Span.hpp"
-#include <climits>
 #include <cstdlib>
 #include <iostream>
+#include <limits>
 #include <vector>
 
 void testAddNumber(){
@@ -20,6 +20,35 @@ void testAddNumber(){
   std::cout << sp.longestSpan() << std::endl;
 }
 
+void testNegativeNumbers(){
+  std::cout << "Test negative numbers" << std::endl;
+  Span sp = Span(5);
+  try {
+  sp.addNumber(-6);
+  sp.addNumber(-4);
+  sp.addNumber(-42);
+  sp.addNumber(2);
+  sp.addNumber(30);
+  }
+  catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+  try {
+    std::cout << "shortest span" << std::endl;
+    std::cout << sp.shortestSpan() << std::endl;
+  }
+  catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+  try {
+    std::cout << "longest span" << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
+  }
+  catch (const std::exception& e) {
+    std::cerr << e.what() << std::endl;
+  }
+}
+
 void testFillSp(){
   std::cout << "Test fill sp" << std::endl;
   Span sp = Span(20000);
@@ -28,25 +57,25 @@ void testFillSp(){
   try {
    for (int i = 0; i < 20000; i++)
     vec.push_back(rand() % 20000);
-   std::cout << "filling span" << std::endl;
+   std::cout << "filling span with random numbers" << std::endl;
    sp.fill(vec.begin(), vec.end());
    std::cout << sp.getCapacity() << std::endl;
   } catch (const std::exception& e) {
-    std::cerr << e.what() << '\n';
+    std::cerr << e.what() << std::endl;
   }
   try{
     std::cout << "shortest span" << std::endl;
     std::cout << sp.shortestSpan() << std::endl;
   }
   catch (const std::exception& e) {
-    std::cerr << e.what() << '\n';
+    std::cerr << e.what() << std::endl;
   }
   try{
     std::cout << "longest span" << std::endl;
     std::cout << sp.longestSpan() << std::endl;
   }
   catch (const std::exception& e) {
-    std::cerr << e.what() << '\n';
+    std::cerr << e.what() << std::endl;
   }
 }
 
@@ -70,21 +99,24 @@ void testOutOfRange(){
   catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
+  std::vector<int> vec;
   try {
-    sp.addNumber(2147483647);
-  } catch (const std::exception& e) {
-    std::cerr << e.what() << std::endl;;
-  }
-  try {
-    sp.addNumber(-2147483648);
+   for (int i = 0; i < 20000; i++)
+    vec.push_back(rand() % 20000);
+   std::cout << "filling span with random numbers" << std::endl;
+   sp.fill(vec.begin(), vec.end() + 1);
+   std::cout << sp.getCapacity() << std::endl;
   } catch (const std::exception& e) {
     std::cerr << e.what() << std::endl;
   }
-}
+ }
 
 int main(void) {
   std::cout << "-------------------------------" << std::endl;
   testAddNumber();
+  std::cout << std::endl;
+  std::cout << "-------------------------------" << std::endl;
+  testNegativeNumbers();
   std::cout << std::endl;
   std::cout << "-------------------------------" << std::endl;
   testFillSp();

@@ -1,10 +1,13 @@
 #include "MutantStack.hpp"
 #include <iostream>
+#include <vector>
+#include <list>
+#include <deque>
 
-void testMy() {
+void testWithDeque() {
   // Test 1: Default Constructor and Basic Operations
   std::cout << "Test 1: Basic stack operations\n";
-  MutantStack<int> mstack;
+  MutantStack<int, std::deque<int> > mstack;
   std::cout << "Stack created. Is empty: " << (mstack.empty() ? "Yes" : "No")
             << "\n";
 
@@ -85,6 +88,52 @@ void testMy() {
   std::cout << "\nAll tests completed.\n";
 }
 
+void testWithVector(){
+  std::cout << "Test with vector" << std::endl;
+  MutantStack<int, std::vector<int> > mstack;
+  mstack.push(5);
+  mstack.push(17);
+  std::cout << mstack.top() << std::endl;
+  mstack.pop();
+  std::cout << mstack.size() << std::endl;
+  mstack.push(3);
+  mstack.push(5);
+  mstack.push(737);
+  mstack.push(0);
+  MutantStack<int, std::vector<int> >::iterator it = mstack.begin();
+  MutantStack<int, std::vector<int> >::iterator ite = mstack.end();
+  ++it;
+  --it;
+  while (it != ite) {
+    std::cout << *it << std::endl;
+    ++it;
+  }
+  std::stack<int, std::vector<int> > s(mstack);
+}
+
+void testWithList(){
+  std::cout << "Test with list" << std::endl;
+  MutantStack<int, std::list<int> > mstack;
+  mstack.push(5);
+  mstack.push(17);
+   std::cout << mstack.top() << std::endl;
+  mstack.pop();
+  std::cout << mstack.size() << std::endl;
+  mstack.push(3);
+  mstack.push(5);
+  mstack.push(737);
+  mstack.push(0);
+  MutantStack<int, std::list<int> >::iterator it = mstack.begin();
+  MutantStack<int, std::list<int> >::iterator ite = mstack.end();
+  ++it;
+  --it;
+  while (it != ite) {
+    std::cout << *it << std::endl;
+    ++it;
+  }
+  std::stack<int, std::list<int> > s(mstack);
+}
+
 void testSubject() {
   std::cout << "------Subject tests------" << std::endl;
   MutantStack<int> mstack;
@@ -112,7 +161,13 @@ int main(void) {
   testSubject();
   std::cout << "------------" << std::endl;
   std::cout << std::endl;
-  testMy();
+  testWithDeque();
+  std::cout << "------------" << std::endl;
+  std::cout << std::endl;
+  testWithVector();
+  std::cout << "------------" << std::endl;
+  std::cout << std::endl;
+  testWithList();
   std::cout << "------------" << std::endl;
   std::cout << std::endl;
   return 0;
