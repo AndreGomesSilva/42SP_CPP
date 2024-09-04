@@ -13,7 +13,6 @@ class Btc {
     Btc();
     Btc(const Btc &other);
     ~Btc();
-
 };
 
 

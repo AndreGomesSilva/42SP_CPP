@@ -1,12 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <string>
-
-int getFileContent(std::string file, std::map<std::string, float> &db)
-{
-
-}
 
 int validateFile(std::string input) {
   if (input.empty())
@@ -22,13 +16,15 @@ int validateFile(std::string input) {
   return 0;
 }
 
+
 int main(int argc, char **argv) {
   if (argc != 2) {
     std::cerr << "Usage:  " << argv[0] << " <filename>" << std::endl;
     return 1;
   }
   std::string input = argv[1];
-  if (!validateFile(input))
+  std::string dataFile = "data.csv";
+  if (!validateFile(input) && !validateFile(dataFile))
   {
     std::cerr << "Invalid File" << std::endl;
     return 1;
