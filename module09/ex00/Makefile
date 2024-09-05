@@ -1,5 +1,5 @@
 NAME = btc
-CC = c++
+CC = c++ -g3
 FLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 INC = -I ./
@@ -9,6 +9,7 @@ SRCS_DIR = ./
 OBJS_DIR = objs/
 
 FILE = main \
+			 BitcoinExchange
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
