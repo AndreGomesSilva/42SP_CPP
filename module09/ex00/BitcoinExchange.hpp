@@ -1,8 +1,15 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include "iostream"
+#include <iostream>
+#include <string>
 #include <fstream>
+#include <sstream>
+#include <exception>
+#include <stdexcept>
+#include <iterator>
+#include <iomanip>
+#include <cstdio>
 #include <map>
 
 class Btc {
@@ -21,6 +28,8 @@ class Btc {
 
  bool validateFiles();
  bool initDB();
+ void searchPrice(void);
+ std::map<std::string const, float>::iterator getPrice(std::string const date);
  std::map<std::string const, float> *getDB(std::string const _dataFile) const;
   void setDB(std::map<std::string const, float> *db);
 };

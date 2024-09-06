@@ -18,5 +18,13 @@ int main(int argc, char **argv) {
     return 1;
   }
   bitcoin.initDB();
+  try{
+  bitcoin.searchPrice();
+  }
+  catch (std::exception &e)
+  {
+    std::cout << e.what() << std::endl;
+    return 1;
+  }
   std::cout << "Ok " << std::endl; return 0;
 }
