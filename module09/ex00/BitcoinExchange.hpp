@@ -2,14 +2,9 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
-#include <string>
 #include <fstream>
 #include <sstream>
 #include <exception>
-#include <stdexcept>
-#include <iterator>
-#include <iomanip>
-#include <cstdio>
 #include <map>
 
 class Btc {
@@ -44,8 +39,5 @@ class Btc {
         virtual const char *what() const throw();
   };
 };
-
-
-
 
 #endif

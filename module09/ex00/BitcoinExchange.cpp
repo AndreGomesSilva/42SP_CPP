@@ -1,9 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <cstdio>
-#include <exception>
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
 
 Btc::Btc() : _dataFile("data.csv"), _db(NULL), _execFile("input.txt"){};
 
@@ -17,7 +12,6 @@ Btc::Btc(std::string const dataFile, std::map<std::string const, float> *db,
 }
 
 Btc::~Btc() {
-  std::cout << "Destructor called" << std::endl;
   delete _db;
 }
 
@@ -74,13 +68,14 @@ void Btc::searchPrice() {
   }
   getline(file, inputLine);
   if (inputLine != "date | value") {
-    std::cout <<  "Error: bad formated heard inputFile" << std::endl;;
+    std::cout << "Error: bad formated heard inputFile" << std::endl;
+    ;
   }
   while (getline(file, inputLine)) {
     try {
       pos = inputLine.find("|");
       if (pos == std::string::npos)
-               throw Btc::InvalidInputException("Error: bad input => " + date);
+        throw Btc::InvalidInputException("Error: bad input => " + date);
       date = inputLine.substr(0, pos);
       try {
         value = stringToFloat(inputLine.substr(pos + 1));
@@ -105,7 +100,6 @@ void Btc::setDB(std::map<std::string const, float> *db) {
 
   std::ifstream file(_dataFile.c_str());
   std::getline(file, line);
-  std::cout << line << std::endl;
   if (line != "date,exchange_rate") {
     file.close();
     throw std::logic_error("Error: fail to fill the database, file corrupted");
@@ -124,43 +118,47 @@ void Btc::setDB(std::map<std::string const, float> *db) {
   file.close();
 }
 
-static bool isLeapYear(int year)  {
-    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+static bool isLeapYear(int year) {
+  return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
-static bool validateDate(std::string &date)
-{
- if (date.empty())
+static bool validateDate(std::string &date) {
+  if (date.empty())
     return false;
- int day, month, year;
- char delimiter1, delimiter2, space;
- std::stringstream ss(date);
- ss >> year >> delimiter1 >> month >> delimiter2 >> day >> space;
- std::cout << year << delimiter1 << month << delimiter2 << day << " " << space << std::endl;
- if (delimiter1 != '-' || delimiter2 != '-')
+  int day, month, year;
+  char delimiter1, delimiter2, space;
+  std::stringstream ss(date);
+  ss >> year >> delimiter1 >> month >> delimiter2 >> day;
+  if (delimiter1 != '-' || delimiter2 != '-')
     return false;
- if (!ss.eof())
-    return false;
- if (year < 2009 || year > 2024)
-    return false;
- if (month < 1 || month > 12)
-    return false;
- if (day < 1 || day > 31)
-    return false;
- if (month == 2){
-    if (isLeapYear(year)){
-        if (day > 29){
-            return false;
-        }
-    }else {
-        if (day > 28){
-            return false;
-        }
+  if (ss >> space) {
+    if (space != ' ') {
+      return false;
     }
- }
- if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+    if (ss >> space) {
+      return false;
+    }
+  }
+  if (year < 2009 || year > 2024)
     return false;
- return true;
+  if (month < 1 || month > 12)
+    return false;
+  if (day < 1 || day > 31)
+    return false;
+  if (month == 2) {
+    if (isLeapYear(year)) {
+      if (day > 29) {
+        return false;
+      }
+    } else {
+      if (day > 28) {
+        return false;
+      }
+    }
+  }
+  if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+    return false;
+  return true;
 }
 
 std::map<std::string const, float>::iterator
