@@ -27,11 +27,22 @@ class Btc {
 
 
  bool validateFiles();
+ std::map<std::string const, float>::iterator validateInputLine(std::string date, float value);
  bool initDB();
  void searchPrice(void);
  std::map<std::string const, float>::iterator getPrice(std::string const date);
  std::map<std::string const, float> *getDB(std::string const _dataFile) const;
   void setDB(std::map<std::string const, float> *db);
+
+  class InvalidInputException : public std::exception {
+      private:
+        std::string _message;
+
+      public:
+        InvalidInputException(const std::string& message);
+        virtual ~InvalidInputException() throw();
+        virtual const char *what() const throw();
+  };
 };
 
 
