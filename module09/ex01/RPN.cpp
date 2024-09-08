@@ -117,7 +117,6 @@ int RPN::calculator() {
       _stack.push(result);
     }
   }
-
   if (_stack.size() != 1) {
     throw std::invalid_argument("Error: Invalid RPN expression");
   }
