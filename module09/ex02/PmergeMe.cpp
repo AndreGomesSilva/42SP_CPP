@@ -1,52 +1,30 @@
 #include "PmergeMe.hpp"
-#include <list>
-#include <sstream>
-#include <stdexcept>
-#include <vector>
 
 PmergeMe::PmergeMe(){
-    std::cout << "Constructor PmergeMe called" << std::endl;
 }
 
 PmergeMe::PmergeMe(PmergeMe &toCopy){
-    std::cout << "Copy constructor PmergeMe called" << std::endl;
     (void) toCopy;
 }
 
-PmergeMe::~PmergeMe(){
-    std::cout << "Destructor PmergeMe called" << std::endl;
-}
+PmergeMe::~PmergeMe(){}
 
 PmergeMe &PmergeMe::operator=(PmergeMe &toCopy){
-    std::cout << "Assignment copy operator called" << std::endl;
     (void) toCopy;
     return *this;
 }
 
-// static void splitVec(std::vector<int> mainVec, std::vector<int>vecA, std::vector<int> vecB)
-// {
-
-// }
-
-// std::vector<int> mergeInsertVector(std::vector<int> &vec)
-// {
-//     std::vector<int> sortedVec;
-
-//     int holdLastValue;
-//     bool odd = vec.size() % 2 != 0;
-//     if (odd)
-//     {
-//         holdLastValue = vec.back();
-//         vec.pop_back();
-//     }
-//   return vec;
-// }
+int PmergeMe::jacobsThal(int n){
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return jacobsThal(n - 1) + 2 * jacobsThal(n - 2);
+}
 
 void PmergeMe::sort(int argc, char **argv){
 
-    std::vector<int> unsortedVec;
+    std::vector<int> unsortVec;
     std::vector<int> sortedVec;
-    std::list<int> unsortedLst;
+    std::list<int> unsortLst;
     std::list<int> sorteLst;
     std::stringstream ss;
     int value;
@@ -60,14 +38,26 @@ void PmergeMe::sort(int argc, char **argv){
         {
             throw std::invalid_argument("Error");
         }
-        unsortedVec.push_back(value);
-        unsortedLst.push_back(value);
+        unsortVec.push_back(value);
+        unsortLst.push_back(value);
     }
-    printContainer(unsortedVec);
-    printContainer(unsortedLst);
-        // //Vector
-        // sortedVec = mergeInsertVector(unsortedVec);
 
-        // //List
-        // sorteLst = mergeInsertList(unsortedLst);
+    //Vector
+    std::cout << "Before: ";
+    printContainer(unsortVec);
+    sortedVec = mergeInsertionSort<std::vector<int>, std::vector<std::pair<int, int > > >(unsortVec);
+    std::cout << "After: ";
+    printContainer(sortedVec);
+    displayTime<std::vector<int>, std::vector<std::pair<int, int > > >(unsortVec, "vector");
+    std::cout << std::endl;
+    std::cout << "---------------------" << std::endl;
+    std::cout << std::endl;
+
+    //List
+    std::cout << "Before: ";
+    printContainer(unsortLst);
+    sorteLst = mergeInsertionSort<std::list<int>, std::list<std::pair<int, int> > > (unsortLst);
+    std::cout << "After: ";
+    printContainer(sorteLst);
+    displayTime<std::list<int>, std::list<std::pair<int, int > > >(unsortLst, "list");
 }

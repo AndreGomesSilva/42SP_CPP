@@ -1,17 +1,18 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <deque>
 #include <list>
+#include <sstream>
+#include <stdexcept>
 #include <vector>
 
 class PmergeMe  {
     private:
-        std::vector<int> containerOne;
-        std::list<int> containerTwo;
+        bool _hasStraggler;
 
     public:
         PmergeMe();
@@ -20,9 +21,7 @@ class PmergeMe  {
 
         PmergeMe &operator=(PmergeMe &toCopy);
         void sort(int argc, char **argv);
-        std::vector<int> mergeInsertVector(std::vector<int> vec);
-        std::list<int> mergeInsertList(std::list<int> lst);
-
+        int jacobsThal(int n);
         template <typename Container>
         void printContainer(const Container &container)
         {
@@ -32,6 +31,18 @@ class PmergeMe  {
                 std::cout << *it << " ";
             }
             std::cout << std::endl;
+        }
+
+        template <typename Container>
+        void printContainerPair(Container &container)
+        {
+            typename Container::iterator it;
+            std::cout << "[ ";
+            for (typename Container::iterator it = container.begin(); it != container.end(); ++it)
+            {
+                std::cout << "[ " << it->first << " " << it->second  << " ]" << " ";
+            }
+            std::cout << " ]" << std::endl;
         }
 
         template <typename Container>
@@ -45,17 +56,17 @@ class PmergeMe  {
         }
 
         template <typename InputContainer, typename OutputContainer>
-        OutputContainer createPairs(const InputContainer &A)
+        OutputContainer createPairs(const InputContainer &input)
         {
             OutputContainer splitContainer;
-            typename InputContainer::const_iterator it = A.begin();
+            typename InputContainer::const_iterator it = input.begin();
 
-            while (it != A.end())
+            while (it != input.end())
             {
                 typename InputContainer::value_type first = *it;
                 typename InputContainer::value_type second = typename InputContainer::value_type();
                 ++it;
-                if (it != A.end()) {
+                if (it != input.end()) {
                     second = *it;
                     ++it;
                 }
@@ -64,47 +75,84 @@ class PmergeMe  {
             return splitContainer;
         }
 
-        int jacbsthal(int n){
-            if (n == 0) return 0;
-            if (n == 1) return 1;
-            return jacbsthal(n - 1) + 2 * jacbsthal(n - 2);
-        }
 
         template <typename Container>
         Container buildJacobThalSequence(Container &pend)
         {
             Container sequence;
             int jacobIndex = 3;
-            while (jacbsthal(jacobIndex) < static_cast<int>(pend.size() -1))
+            while (jacobsThal(jacobIndex) < static_cast<int>(pend.size() -1))
             {
-                sequence.push_back(jacbsthal(jacobIndex));
+                sequence.push_back(jacobsThal(jacobIndex));
                 ++jacobIndex;
             }
             return sequence;
         }
 
         template <typename Container>
-        void insertionSortRecursive(Container& container, int n)
+        void insertionSortRecursive(Container& container, typename Container::iterator last)
         {
-            // Base case
-            if (n <= 1)
+            // Base case: If container has one or fewer elements, it's already sorted
+            if (last == container.begin())
                 return;
 
             // Sort first n-1 elements
-            insertionSortRecursive(container, n-1);
+            typename Container::iterator prev = last;
+            --prev;
+            insertionSortRecursive(container, prev);
 
-            // Insert the last element at its correct position in sorted array
-            typename Container::value_type last = container[n-1];
-            int j = n-2;
+            // Insert the last element at its correct position in the sorted array
+            typename Container::value_type value = *last;
 
-            // Move elements of container[0..n-2] that are greater than last.second to one position ahead
-            while (j >= 0 && container[j].second > last.second)
+            typename Container::iterator j = prev;
+
+            // Move elements of container[begin()..last-1] that are greater than last.second to one position ahead
+            while (j != container.begin() && j->second > value.second)
             {
-                container[j+1] = container[j];
-                j--;
+                typename Container::iterator next = j;
+                ++next;
+                *next = *j;
+                --j;
             }
-            container[j+1] = last;
+            // Special case for the first element
+            if (j == container.begin() && j->second > value.second)
+            {
+                typename Container::iterator next = j;
+                ++next;
+                *next = *j;
+                *j = value;
+            }
+            else
+            {
+                typename Container::iterator next = j;
+                ++next;
+                *next = value;
+            }
         }
+
+        // template <typename Container>
+        // void insertionSortVector(Container& container, int n)
+        // {
+        //     // Base case
+        //     if (n <= 1)
+        //         return;
+
+        //     // Sort first n-1 elements
+        //     insertionSortVector(container, n-1);
+
+        //     // Insert the last element at its correct position in sorted array
+        //     typename Container::value_type last = container[n-1];
+        //     int j = n-2;
+
+        //     // Move elements of container[0..n-2] that are greater than last.second to one position ahead
+        //     while (j >= 0 && container[j].second > last.second)
+        //     {
+        //         container[j+1] = container[j];
+        //         j--;
+        //     }
+        //     container[j+1] = last;
+        // }
+
 
         template <typename Container, typename PairContainer>
         Container createS(PairContainer &sortedPairs, int straggler)
@@ -112,78 +160,54 @@ class PmergeMe  {
             Container s;
             Container pend;
             Container JacobSequece;
-            (void)straggler;
 
             for (typename PairContainer::iterator it = sortedPairs.begin(); it != sortedPairs.end(); ++it)
             {
                 s.push_back(it->second);
                 pend.push_back(it->first);
             }
-            printContainer(s);
-            printContainer(pend);
-
             s.insert(s.begin(), pend.front());
             pend.erase(pend.begin());
-
-            printContainer(s);
-            printContainer(pend);
-
             JacobSequece = buildJacobThalSequence(pend);
-            printContainer(JacobSequece);
 
-
-            int iterator = 0;
-                while (iterator < static_cast<int>(pend.size())) {
-                    typename Container::value_type item = pend[iterator++];
+            for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it) {
+                    typename Container::value_type item = *it;
                     typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), item);
                     s.insert(insertion_point, item);
                 }
 
-                if (straggler != typename Container::value_type()) {
+                if (_hasStraggler) {
                     typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), straggler);
                     s.insert(insertion_point, straggler);
                 }
-            printContainer(s);
             return (s);
         }
 
-        template <typename Container>
-        Container mergeInsertionSort(Container &A){
-            printContainer(A);
-            typedef std::deque<std::pair<int, int> > splitDeque;
-            bool hasStragler = A.size() % 2 != 0;
+        template <typename Container, typename PairContainer>
+        Container mergeInsertionSort(Container &input){
+            Container result;
+            _hasStraggler = input.size() % 2 != 0;
             typename Container::value_type straggler = typename Container::value_type();
+            if (_hasStraggler)
+            {
+                straggler = input.back();
+                input.pop_back();
+            }
+            PairContainer pairContainer = createPairs<Container, PairContainer>(input);
+            SortInsidePair(pairContainer);
+            insertionSortRecursive(pairContainer, --pairContainer.end());
+            result = createS<Container, PairContainer>(pairContainer, straggler);
+            return result;
+        }
 
-            if (hasStragler)
-            {
-                straggler = A.back();
-                A.pop_back();
-            }
-            (void)straggler;
-            printContainer(A);
-            splitDeque dequePair = createPairs<Container, splitDeque>(A);
-            std::cout << "[ ";
-            for (std::deque<std::pair<int, int> >::iterator it = dequePair.begin(); it != dequePair.end(); ++it)
-            {
-                std::cout << "[ " << it->first << " " << it->second  << " ]" << " ";
-            }
-            std::cout << " ]" << std::endl;
-            SortInsidePair(dequePair);
-            std::cout << "[ ";
-            for (std::deque<std::pair<int, int> >::iterator it = dequePair.begin(); it != dequePair.end(); ++it)
-            {
-                std::cout << "[ " << it->first << " " << it->second  << " ]" << " ";
-            }
-            std::cout << " ]" << std::endl;
-            insertionSortRecursive(dequePair, dequePair.size());
-            std::cout << "[ ";
-            for (std::deque<std::pair<int, int> >::iterator it = dequePair.begin(); it != dequePair.end(); ++it)
-            {
-                std::cout << "[ " << it->first << " " << it->second  << " ]" << " ";
-            }
-            std::cout << " ]" << std::endl;
-            createS<Container, splitDeque>(dequePair, straggler);
-            return A;
+        template <typename Container, typename PairContainer>
+        void displayTime(Container &container, const std::string type)
+        {
+            clock_t start = clock();
+            mergeInsertionSort<Container, PairContainer>(container);
+            clock_t end = clock();
+            double timeSec = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+            std::cout << "Time to process a range of " << container.size() << " elements with " << "std::" << type << ": " << (timeSec * 1000.0) << " us" << std::endl;
         }
 };
 
