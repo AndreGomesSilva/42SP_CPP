@@ -28,22 +28,19 @@ PmergeMe &PmergeMe::operator=(PmergeMe &toCopy){
 
 // }
 
-std::vector<int> mergeInsertVector(std::vector<int> vec)
-{
-    std::vector<int> sortedVec;
-    std::vector<int> vecA;
-    std::vector<int> vecB;
+// std::vector<int> mergeInsertVector(std::vector<int> &vec)
+// {
+//     std::vector<int> sortedVec;
 
-    int holdLastValue;
-    bool odd = vec.size() % 2 != 0;
-    if (odd)
-    {
-        holdLastValue = vec.back();
-        vec.pop_back();
-    }
-    splitVec(vec, vecA, vecB);
-
-}
+//     int holdLastValue;
+//     bool odd = vec.size() % 2 != 0;
+//     if (odd)
+//     {
+//         holdLastValue = vec.back();
+//         vec.pop_back();
+//     }
+//   return vec;
+// }
 
 void PmergeMe::sort(int argc, char **argv){
 
