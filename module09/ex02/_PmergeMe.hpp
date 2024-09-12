@@ -20,7 +20,10 @@ class PmergeMe  {
         void sort(int argc, char **argv);
         std::vector<int> mergeInsertVector(std::vector<int> vec);
         std::list<int> mergeInsertList(std::list<int> lst);
-
+        std::vector<std::pair<int, int> > splitVec(std::vector<int> mainVec);
+        void sortInsidePairs(std::vector<std::pair<int, int> > &vec);
+        void sortByPairs(std::vector<std::pair<int, int> > &vec, int n);
+        void insertPairInVec(std::pair<int, int> &pair, std::vector<std::pair<int, int> > &vec, int n);
         template <typename Container>
         void printContainer(const Container &container)
         {

@@ -48,7 +48,7 @@ static float stringToFloat(const std::string &str) {
 std::map<std::string const, float>::iterator
 Btc::getPrice(std::string const date) {
   if (date < _db->begin()->first)
-    return _db->begin();
+    throw Btc::InvalidInputException("Error: not a valid date => " + date);
   std::map<std::string const, float>::iterator it = _db->lower_bound(date);
   if (it->first != date)
     --it;
