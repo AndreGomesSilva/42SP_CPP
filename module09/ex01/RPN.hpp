@@ -7,11 +7,12 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <list>
 
 class RPN{
     private:
         std::string &_input;
-        std::stack<int> _stack;
+        std::stack<int,  std::list<int> > _stack;
 
     public:
         RPN(std::string &input);

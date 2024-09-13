@@ -1,6 +1,8 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : _hasStraggler(false), _unsortVec(), _unsortDeque() {
+PmergeMe::PmergeMe() : _hasStraggler(false) {
+    _unsortVec = std::vector<int>();
+    _unsortDeque = std::deque<int>();
 }
 
 PmergeMe::PmergeMe(PmergeMe &toCopy) : _hasStraggler(toCopy._hasStraggler), _unsortVec(toCopy._unsortVec), _unsortDeque(toCopy._unsortDeque) {
@@ -25,7 +27,6 @@ int PmergeMe::jacobsthal(int n){
 }
 
 void PmergeMe::sort(int argc, char **argv){
-
     std::stringstream ss;
     int value;
     for (int i = 1; i < argc; ++i)
@@ -42,13 +43,11 @@ void PmergeMe::sort(int argc, char **argv){
         _unsortDeque.push_back(value);
     }
 
-    //Vector
     std::cout << "Before: ";
     printContainer(_unsortVec);
-    sortShowTime<std::vector<int>, std::vector<std::pair<int, int > > >(_unsortVec, "vector");
 
-    //List
-    std::cout << "Before: ";
-    printContainer(_unsortDeque);
+    //Vector
+    sortShowTime<std::vector<int>, std::vector<std::pair<int, int > > >(_unsortVec, "vector");
+    //Deque
     sortShowTime<std::deque<int>, std::deque<std::pair<int, int > > >(_unsortDeque, "deque");
 }

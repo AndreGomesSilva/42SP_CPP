@@ -1,7 +1,7 @@
 #include "RPN.hpp"
 
 RPN::RPN(std::string &input) : _input(input) {
-  _stack = std::stack<int>();
+  _stack = std::stack<int, std::list<int> >();
 };
 
 RPN::RPN(RPN &toCopy) : _input(toCopy._input), _stack(toCopy._stack) {

@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <list>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
@@ -39,37 +38,30 @@ class PmergeMe  {
         template <typename Container>
         void SortInsidePair(Container &pairs)
         {
-            for (typename Container::iterator it = pairs.begin(); it != pairs.end(); ++it)
+            for (std::size_t i = 0; i < pairs.size(); ++i)
             {
-                if (it->first > it->second)
-                    std::swap(it->first, it->second);
+                if (pairs[i].first > pairs[i].second)
+                    std::swap(pairs[i].first, pairs[i].second);
             }
         }
-        
+
         template <typename InputContainer, typename OutputContainer>
         OutputContainer createPairs(const InputContainer &input)
         {
             OutputContainer splitContainer;
-            typename InputContainer::const_iterator it = input.begin();
-
-            while (it != input.end())
+            for (std::size_t i = 0; i < input.size(); i += 2)
             {
-                typename InputContainer::value_type first = *it;
-                typename InputContainer::value_type second = typename InputContainer::value_type();
-                ++it;
-                if (it != input.end()) {
-                    second = *it;
-                    ++it;
-                }
+                typename InputContainer::value_type first = input[i];
+                typename InputContainer::value_type second = (i + 1 < input.size()) ? input[i + 1] : typename InputContainer::value_type();
                 splitContainer.push_back(std::make_pair(first, second));
             }
             return splitContainer;
         }
 
         template <typename Container>
-        std::vector<int> buildJacobThalSequence(Container &pend)
+        Container buildJacobThalSequence(Container &pend)
         {
-            std::vector<int> sequence;
+            Container sequence;
             int jacobIndex = 3;
             while (jacobsthal(jacobIndex) < static_cast<int>(pend.size() -1))
             {
@@ -80,37 +72,28 @@ class PmergeMe  {
         }
 
         template <typename Container>
-        void insertionSortRecursive(Container& container, typename Container::iterator last)
+        void insertionSortRecursive(Container& container, std::size_t last)
         {
-            if (last == container.begin())
+            if (last == 0)
                 return;
-            typename Container::iterator prev = last;
-            --prev;
+            insertionSortRecursive(container, last - 1);
 
-            insertionSortRecursive(container, prev);
+            typename Container::value_type value = container[last];
+            std::size_t j = last - 1;
 
-            typename Container::value_type value = *last;
-            typename Container::iterator j = prev;
-
-            while (j != container.begin() && j->second > value.second)
+            while (j > 0 && container[j].second > value.second)
             {
-                typename Container::iterator next = j;
-                ++next;
-                *next = *j;
+                container[j + 1] = container[j];
                 --j;
             }
-            if (j == container.begin() && j->second > value.second)
+            if (j == 0 && container[j].second > value.second)
             {
-                typename Container::iterator next = j;
-                ++next;
-                *next = *j;
-                *j = value;
+                container[j + 1] = container[j];
+                container[j] = value;
             }
             else
             {
-                typename Container::iterator next = j;
-                ++next;
-                *next = value;
+                container[j + 1] = value;
             }
         }
 
@@ -119,34 +102,37 @@ class PmergeMe  {
         {
             Container s;
             Container pend;
-            std::vector<int> JacobSequece;
+            Container JacobSequence;
 
-            for (typename PairContainer::iterator it = sortedPairs.begin(); it != sortedPairs.end(); ++it)
+            for (std::size_t i = 0; i < sortedPairs.size(); ++i)
             {
-                s.push_back(it->second);
-                pend.push_back(it->first);
+                s.push_back(sortedPairs[i].second);
+                pend.push_back(sortedPairs[i].first);
             }
-            s.insert(s.begin(), pend.front());
-            pend.erase(pend.begin());
-            JacobSequece = buildJacobThalSequence(pend);
 
-            for (typename Container::iterator it = pend.begin(); it != pend.end(); ++it) {
-                typename Container::value_type item = *it;
+            s.insert(s.begin(), pend[0]);
+            pend.erase(pend.begin());
+            JacobSequence = buildJacobThalSequence(pend);
+
+            for (std::size_t i = 0; i < pend.size(); ++i) {
+                typename Container::value_type item = pend[i];
                 typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), item);
                 s.insert(insertion_point, item);
             }
-            for (std::vector<int>::iterator it = JacobSequece.begin(); it != JacobSequece.end(); ++it) {
-              if (*it < static_cast<int>(pend.size())) {
-                  typename Container::value_type item = pend[*it];
-                  typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), item);
-                  s.insert(insertion_point, item);
-              }
+
+            for (std::size_t i = 0; i < JacobSequence.size(); ++i) {
+                if (JacobSequence[i] < static_cast<int>(pend.size())) {
+                    typename Container::value_type item = pend[JacobSequence[i]];
+                    typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), item);
+                    s.insert(insertion_point, item);
+                }
             }
+
             if (_hasStraggler) {
                 typename Container::iterator insertion_point = std::upper_bound(s.begin(), s.end(), straggler);
                 s.insert(insertion_point, straggler);
             }
-            return (s);
+            return s;
         }
 
         template <typename Container, typename PairContainer>
@@ -161,7 +147,7 @@ class PmergeMe  {
             }
             PairContainer pairContainer = createPairs<Container, PairContainer>(input);
             SortInsidePair(pairContainer);
-            insertionSortRecursive(pairContainer, --pairContainer.end());
+            insertionSortRecursive(pairContainer, pairContainer.size() - 1);
             result = createS<Container, PairContainer>(pairContainer, straggler);
             return result;
         }
@@ -173,8 +159,11 @@ class PmergeMe  {
             clock_t start = clock();
             result = mergeInsertionSort<Container, PairContainer>(container);
             clock_t end = clock();
-            std::cout << "After: ";
-            printContainer(result);
+            if (type == "vector")
+            {
+                std::cout << "After: ";
+                printContainer(result);
+            }
             double timeSec = static_cast<double>(end - start) / CLOCKS_PER_SEC;
             std::cout << "Time to process a range of " << container.size() << " elements with " << "std::" << type << ": " << (timeSec * 1000.0) << " us" << std::endl;
         }
