@@ -4,7 +4,6 @@
 #include <sstream>
 
 int main(int argc, char **argv) {
-    std::cout << "Start PmergeME" << std::endl;
     if (argc > 2)
     {
         PmergeMe pm;

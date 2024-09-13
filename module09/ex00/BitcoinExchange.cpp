@@ -15,16 +15,6 @@ Btc::~Btc() {
   delete _db;
 }
 
-// static void printDB(std::map<std::string const, float> *db) {
-//   std::cout << "------ DB ------" << std::endl;
-//   for (std::map<std::string const, float>::iterator it = db->begin();
-//        it != db->end(); ++it) {
-//     std::cout << "Key: " << std::fixed << std::setprecision(2) << it->first
-//               << " -- Value: " << it->second << std::endl;
-//   }
-//   std::cout << "------ -- ------" << std::endl;
-// }
-
 bool Btc::initDB() {
   _db = new std::map<std::string const, float>;
   try {
@@ -68,15 +58,15 @@ void Btc::searchPrice() {
   }
   getline(file, inputLine);
   if (inputLine != "date | value") {
-    std::cout << "Error: bad formated heard inputFile" << std::endl;
+    std::cout << "Error: bad formated hearder inputFile" << std::endl;
     ;
   }
   while (getline(file, inputLine)) {
     try {
       pos = inputLine.find("|");
+      date = inputLine.substr(0, pos);
       if (pos == std::string::npos)
         throw Btc::InvalidInputException("Error: bad input => " + date);
-      date = inputLine.substr(0, pos);
       try {
         value = stringToFloat(inputLine.substr(pos + 1));
       } catch (std::exception &e) {
@@ -84,7 +74,7 @@ void Btc::searchPrice() {
       }
       it = validateInputLine(date, value);
       if (it != _db->end())
-        std::cout << date << " => " << value << " = " << value * it->second
+        std::cout << date << "=> " << value << " = " << value * it->second
                   << std::endl;
     } catch (std::exception &e) {
       std::cout << e.what() << std::endl;

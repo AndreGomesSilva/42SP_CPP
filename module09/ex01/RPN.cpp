@@ -1,22 +1,15 @@
 #include "RPN.hpp"
-#include <cctype>
-#include <sstream>
-#include <stdexcept>
-#include <string>
 
 RPN::RPN(std::string &input) : _input(input) {
-  std::cout << "RNP: Constructor called" << std::endl;
   _stack = std::stack<int>();
 };
 
 RPN::RPN(RPN &toCopy) : _input(toCopy._input), _stack(toCopy._stack) {
-  std::cout << "RNP: copy contructor called" << std::endl;
 }
 
-RPN::~RPN() { std::cout << "RNP: Destructor called" << std::endl; }
+RPN::~RPN() {}
 
 RPN &RPN::operator=(RPN &toCopy) {
-  std::cout << "Asssingment copy operator called" << std::endl;
   if (this != &toCopy) {
     _input = toCopy._input;
     _stack = toCopy._stack;
@@ -88,7 +81,7 @@ int RPN::calculator() {
       _stack.push(charToInt(*it));
     } else {
       if (_stack.size() < 2) {
-        throw std::invalid_argument("Insufficient operands for operation");
+        throw std::invalid_argument("Error: Insufficient operands for operation");
       }
       firstNumber = _stack.top();
       _stack.pop();
@@ -107,12 +100,12 @@ int RPN::calculator() {
         break;
       case '/':
         if (firstNumber == 0) {
-          throw std::invalid_argument("Division by zero");
+          throw std::invalid_argument("Error: Division by zero");
         }
         result = secondNumber / firstNumber;
         break;
       default:
-        throw std::invalid_argument("Problem with operators");
+        throw std::invalid_argument("Error: Problem with operators");
       }
       _stack.push(result);
     }

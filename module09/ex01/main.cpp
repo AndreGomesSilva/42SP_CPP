@@ -12,7 +12,6 @@ int main(int argc, char **argv) {
     RPN rpn(input);
     if (rpn.validateInput())
     {
-        std::cout << "Valid input" << std::endl;
         try{
             int result = rpn.calculator();
             std::cout << result << std::endl;
@@ -25,7 +24,7 @@ int main(int argc, char **argv) {
     }
     else
     {
-        std::cerr << "Error: Problem with the input" << std::endl;
+        std::cerr << "Error" << std::endl;
     };
     return 0;
 }
