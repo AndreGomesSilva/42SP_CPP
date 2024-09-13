@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <vector>
 #include <deque>
+#include <set>
 
 class PmergeMe  {
     private:
@@ -33,6 +34,23 @@ class PmergeMe  {
                 std::cout << *it << " ";
             }
             std::cout << std::endl;
+        }
+
+        template <typename Container>
+        bool hasDuplicates(Container &container)
+        {
+            std::set<int> box;
+            typename Container::iterator it;
+
+            for(it = container.begin(); it != container.end(); it++)
+            {
+            if (box.find(*it) != box.end())
+            {
+                return true;
+            }
+            box.insert(*it);
+            }
+            return false;
         }
 
         template <typename Container>

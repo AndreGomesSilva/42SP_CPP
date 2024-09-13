@@ -43,6 +43,9 @@ void PmergeMe::sort(int argc, char **argv){
         _unsortDeque.push_back(value);
     }
 
+    if (hasDuplicates(_unsortVec))
+        throw std::invalid_argument("Error");
+
     std::cout << "Before: ";
     printContainer(_unsortVec);
 
